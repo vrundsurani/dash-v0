@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Get Me In</title>
+  
+</head>
+<body>
+
+  <form id="telegramForm">
+    <h2>Get Me In</h2>
+    <input type="text" id="chatId" placeholder="Enter i" required />
+    <textarea id="message" placeholder="Type your message..." required></textarea>
+    <button type="submit">In</button>
+  </form>
+
+  <script>
+    const botToken = '7293354072:AAGcvF5BgdPSt8XFYWn9LjVLMOkjFR95slc'; // Replace with your actual bot token
+
+    document.getElementById('telegramForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const chatId = document.getElementById('chatId').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!chatId || !message) {
+        alert('Both fields are required.');
+        return;
+      }
+
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.ok) {
+          alert('✅ Message sent successfully!');
+        } else {
+          alert('❌ Error: ' + data.description);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('❌ Failed to send message.');
+      });
+    });
+  </script>
+
+</body>
+</html>
