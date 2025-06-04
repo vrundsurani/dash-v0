@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const { user_id, message } = req.body;
 
-    const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN_HERE";
+    const TELEGRAM_BOT_TOKEN = "7553034193:AAHkyTi2gZKEWTJTsB-op65RIXsm6P1maCM";
 
     const response = await fetch(
       `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
